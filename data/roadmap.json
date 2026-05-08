@@ -1,0 +1,637 @@
+{
+  "meta": {
+    "title": "Ruta AI Architect — Sistemas de Agentes AI-native",
+    "profile": "Ingeniero de sistemas L4 · 10+ años · Arquitectura de software",
+    "created": "2026-04-26",
+    "version": "5.0",
+    "totalHours": 480,
+    "objetivo": "Arquitecto de software especializado en sistemas AI-native basados en agentes, capaz de diseñar, implementar y liderar la adopción de IA en empresas.",
+    "rolDestino": "Staff AI Engineer / AI Architect (interno en empresa)",
+    "ajustesV5": [
+      "Cost Engineering explícito desde fase 1 como restricción de diseño, profundizado en fase 2–3",
+      "Evals formales con golden datasets, versionado y CI/CD desde fase 2",
+      "Coordinación multi-agente explícita: memoria compartida vs aislada, orquestación centralizada vs distribuida",
+      "Resiliencia arquitectural: retry strategies, fallbacks, circuit breakers, human-in-the-loop",
+      "Proyecto 4 con baseline medible: métricas before/after comparativas",
+      "Usuario real desde Proyecto 1: al menos 1 persona real usando el agente con feedback documentado"
+    ],
+    "dimensiones": [
+      {
+        "id": "T",
+        "label": "Técnica",
+        "descripcion": "Sistemas de agentes que aguantan producción real"
+      },
+      {
+        "id": "A",
+        "label": "Arquitectural",
+        "descripcion": "Integrar agentes en el tejido tecnológico existente de una empresa"
+      },
+      {
+        "id": "O",
+        "label": "Organizacional",
+        "descripcion": "La empresa opera el sistema sola después de que terminas"
+      }
+    ],
+    "estandarDeEntregable": "El equipo opera el sistema sin intervención continua del arquitecto"
+  },
+  "phases": [
+    {
+      "id": 1,
+      "color": "blue",
+      "title": "Fundamentos de IA + primeros agentes",
+      "months": "Meses 1–2",
+      "hours": 80,
+      "goal": "Construir criterio técnico sólido sobre LLMs y agentes desde el inicio. El resultado no es un proyecto demo: es la capacidad de elegir el modelo correcto, el patrón correcto y la herramienta correcta para un problema empresarial real.",
+      "focus": "Fundamentos técnicos con foco inmediato en agentes. Costos, latencia y límites de contexto son restricciones de diseño desde el día 1, no temas de optimización tardía.",
+      "steps": [
+        {
+          "id": "1-1",
+          "title": "Semana 1–2: Panorama de IA aplicada y agentes",
+          "dimensions": ["T"],
+          "detail": "ML clásico, deep learning, LLMs, agentes autónomos — qué resuelve cada uno y cuándo NO usar IA. Casos reales en empresas, no demos. La pregunta central no es '¿cómo funciona?' sino '¿cuándo lo usarías y cuándo no?'. Entender qué diferencia a un agente de un chatbot simple: autonomía, uso de herramientas, memoria y planificación.",
+          "courses": [
+            {
+              "name": "AI For Everyone",
+              "platform": "Coursera",
+              "author": "Andrew Ng / DeepLearning.AI",
+              "url": "https://www.coursera.org/learn/ai-for-everyone",
+              "free": false,
+              "hours": 6
+            },
+            {
+              "name": "Generative AI with Large Language Models",
+              "platform": "Coursera",
+              "author": "DeepLearning.AI + AWS",
+              "url": "https://www.coursera.org/learn/generative-ai-with-llms",
+              "free": false,
+              "hours": 12
+            }
+          ]
+        },
+        {
+          "id": "1-2",
+          "title": "Semana 3–4: LLMs en práctica — APIs, costos y tool use",
+          "dimensions": ["T", "A"],
+          "detail": "APIs de OpenAI y Anthropic: llamadas, parámetros, system prompts. Structured outputs para integración con sistemas externos. Function calling / tool use: el mecanismo que convierte un LLM en un agente. COST ENGINEERING DESDE EL INICIO: costo por token de input vs output, cómo el largo del system prompt impacta el costo total, diferencia de precios entre modelos (GPT-4o vs GPT-4o-mini vs Claude Haiku vs Sonnet). Latencia y límites de contexto como restricciones de diseño reales, no datos de marketing.",
+          "costEngineering": {
+            "conceptos": [
+              "Pricing por token: input vs output (el output es más caro)",
+              "Estimación de costo por llamada: prompt tokens + completion tokens",
+              "Impacto del tamaño del system prompt en el costo total a escala",
+              "Comparativa de modelos: cuándo usar el modelo barato vs el caro"
+            ]
+          },
+          "courses": [
+            {
+              "name": "ChatGPT Prompt Engineering for Developers",
+              "platform": "DeepLearning.AI",
+              "author": "Andrew Ng + OpenAI",
+              "url": "https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/",
+              "free": true,
+              "hours": 2
+            },
+            {
+              "name": "Building Systems with the ChatGPT API",
+              "platform": "DeepLearning.AI",
+              "author": "OpenAI + DeepLearning.AI",
+              "url": "https://www.deeplearning.ai/short-courses/building-systems-with-chatgpt/",
+              "free": true,
+              "hours": 2
+            }
+          ]
+        },
+        {
+          "id": "1-3",
+          "title": "Semana 5–6: Primeros agentes — tools, memoria y flujos simples",
+          "dimensions": ["T"],
+          "detail": "Primer agente funcional: decide qué herramienta usar, la ejecuta, interpreta el resultado. Tools reales: búsqueda web, ejecución de código, consulta de APIs. Memoria de corto plazo (contexto) vs largo plazo (base de datos externa). Introducción a LangGraph como framework para agentes con estado. Diferencia entre agente reactivo y agente con planificación. Medir el costo real de cada ejecución desde el primer agente.",
+          "courses": [
+            {
+              "name": "AI Agents in LangGraph",
+              "platform": "DeepLearning.AI",
+              "author": "LangChain + DeepLearning.AI",
+              "url": "https://www.deeplearning.ai/short-courses/ai-agents-in-langgraph/",
+              "free": true,
+              "hours": 3
+            },
+            {
+              "name": "Functions, Tools and Agents with LangChain",
+              "platform": "DeepLearning.AI",
+              "author": "DeepLearning.AI",
+              "url": "https://www.deeplearning.ai/short-courses/functions-tools-agents-langchain/",
+              "free": true,
+              "hours": 3
+            }
+          ]
+        },
+        {
+          "id": "1-4",
+          "title": "Semana 7–8: RAG y contexto como herramienta del agente",
+          "dimensions": ["T", "A"],
+          "detail": "RAG no como sistema principal sino como una herramienta más que el agente puede invocar. Embeddings y vector databases (FAISS, ChromaDB) para darle conocimiento empresarial al agente sin re-entrenar el modelo. Tipos de memoria en agentes: corto plazo (ventana de contexto), largo plazo (vector DB), episódica (logs de sesiones anteriores). Diseño de agentes con estado persistente entre sesiones.",
+          "courses": [
+            {
+              "name": "Vector Databases: from Embeddings to Applications",
+              "platform": "DeepLearning.AI",
+              "author": "Weaviate + DeepLearning.AI",
+              "url": "https://www.deeplearning.ai/short-courses/vector-databases-embeddings-applications/",
+              "free": true,
+              "hours": 2
+            },
+            {
+              "name": "Building Agentic RAG with LlamaIndex",
+              "platform": "DeepLearning.AI",
+              "author": "LlamaIndex + DeepLearning.AI",
+              "url": "https://www.deeplearning.ai/short-courses/building-agentic-rag-with-llamaindex/",
+              "free": true,
+              "hours": 2
+            }
+          ]
+        },
+        {
+          "id": "1-5",
+          "title": "Proyecto 1: Agente empresarial básico con usuario real",
+          "dimensions": ["T", "A"],
+          "detail": "Construir un agente que automatice una tarea real: soporte interno, consulta de documentos o FAQs empresariales. Debe usar tools + memoria + RAG. Stack: Python + LangChain o LangGraph + OpenAI API. USUARIO REAL OBLIGATORIO: al menos 1 persona real (compañero de trabajo, colega o contacto cercano) usando el agente en una tarea real. Documentar su feedback: qué falló, qué no entendió, qué esperaba que hiciera. Publicar en GitHub con README que incluye ADRs y costo real por ejecución medido.",
+          "estandar": "Al menos 1 usuario real lo usó para una tarea real. El feedback está documentado. El costo por ejecución está medido. El README explica decisiones de diseño, no solo el código.",
+          "usuarioReal": {
+            "requisito": "Mínimo 1 persona real usando el agente en una tarea real",
+            "entregable": "Documento de feedback: qué falló, qué no entendió, qué cambiarías",
+            "nota": "Puede ser un compañero de trabajo, colega o contacto cercano — no necesita ser un cliente externo"
+          },
+          "courses": []
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "color": "teal",
+      "title": "Agent Engineering",
+      "months": "Mes 3",
+      "hours": 60,
+      "goal": "Diseñar agentes correctamente: control de flujo robusto, resiliencia arquitectural, evals formales reproducibles y cost engineering. Un agente que funciona en tu laptop no es lo mismo que un agente que funciona en producción.",
+      "focus": "La diferencia entre un agente demo y un agente confiable está en cómo manejas los fallos, cómo lo evalúas sistemáticamente y cuánto cuesta operar a escala.",
+      "steps": [
+        {
+          "id": "2-1",
+          "title": "Diseño de agentes — patrones, anti-patrones y resiliencia",
+          "dimensions": ["T", "A"],
+          "detail": "Patrones de diseño para agentes: ReAct, Plan-and-Execute, Reflexion. Single-agent vs multi-step agents. Anti-patrones comunes: loops infinitos, alucinación de nombres de herramientas, pérdida de contexto entre pasos. RESILIENCIA ARQUITECTURAL: retry strategies con backoff exponencial, circuit breakers para herramientas que fallan repetidamente, fallback automático a modelo más simple cuando el modelo principal falla, human-in-the-loop como válvula de seguridad para decisiones de alto riesgo. Un agente que falla mal en producción tiene consecuencias reales — dinero, operaciones, datos.",
+          "resiliencia": {
+            "patrones": [
+              "Retry con backoff exponencial: cuándo reintentar y cuándo no",
+              "Circuit breaker: desactivar tool problemática sin romper el agente entero",
+              "Fallback de modelo: GPT-4o falla → GPT-4o-mini como respaldo",
+              "Human-in-the-loop: qué decisiones NUNCA debe tomar el agente solo",
+              "Graceful degradation: el agente hace lo que puede aunque falten herramientas"
+            ]
+          },
+          "courses": [
+            {
+              "name": "Multi AI Agent Systems with crewAI",
+              "platform": "DeepLearning.AI",
+              "author": "crewAI + DeepLearning.AI",
+              "url": "https://www.deeplearning.ai/short-courses/multi-ai-agent-systems-with-crewai/",
+              "free": true,
+              "hours": 2
+            },
+            {
+              "name": "AI Agentic Design Patterns with AutoGen",
+              "platform": "DeepLearning.AI",
+              "author": "Microsoft + DeepLearning.AI",
+              "url": "https://www.deeplearning.ai/short-courses/ai-agentic-design-patterns-with-autogen/",
+              "free": true,
+              "hours": 2
+            }
+          ]
+        },
+        {
+          "id": "2-2",
+          "title": "Control de flujo y Cost Engineering profundo",
+          "dimensions": ["T", "A"],
+          "detail": "State machines para flujos predecibles y auditables. Graph-based agents (LangGraph) para flujos dinámicos. Manejo de errores en runtime. COST ENGINEERING EN PROFUNDIDAD: prompt caching para reducir tokens repetidos entre llamadas (ahorro de hasta 90% en contextos largos), model routing inteligente — decidir en runtime qué modelo usar según la complejidad de la tarea (modelo barato para clasificación, modelo caro solo para razonamiento complejo), optimización del tamaño del contexto (qué incluir y qué dejar fuera del prompt), estimación y alertas de presupuesto por sesión de agente.",
+          "costEngineering": {
+            "tecnicas": [
+              "Prompt caching: reutilizar prefijos comunes entre llamadas",
+              "Model routing: clasificar la tarea primero con modelo barato, luego decidir",
+              "Context pruning: eliminar partes del historial que ya no aportan",
+              "Token budget por sesión: cortar el agente si supera el límite definido",
+              "Batch processing: agrupar tareas no urgentes para reducir overhead"
+            ]
+          },
+          "courses": []
+        },
+        {
+          "id": "2-3",
+          "title": "Evals formales — golden datasets, versionado y CI/CD",
+          "dimensions": ["T", "A"],
+          "detail": "EVALS COMO INGENIERÍA REPRODUCIBLE — no como 'probé el prompt manualmente y funcionó'. Creación de golden datasets: conjuntos de casos de prueba con input, contexto esperado y output correcto anotado. Versionado de datasets y evals: cada cambio de prompt o modelo corre contra el mismo dataset. LLM-as-judge para evaluación automatizada a escala. Evals integrados en CI/CD: un PR que degrada la tasa de éxito del agente no se mergea. Métricas formales: tasa de éxito por tipo de tarea, latencia p50/p95, costo promedio por tarea, tasa de escalación a humano.",
+          "evalsFormales": {
+            "componentes": [
+              "Golden dataset: casos anotados con input → output esperado",
+              "Eval runner: script que corre todos los casos y reporta métricas",
+              "LLM-as-judge: usar un LLM para evaluar calidad de respuestas a escala",
+              "Versionado: dataset v1, v2... ligado a versión del prompt y del modelo",
+              "CI/CD gate: pull request bloqueado si métricas caen por debajo del umbral"
+            ]
+          },
+          "courses": [
+            {
+              "name": "Evaluating and Debugging Generative AI",
+              "platform": "DeepLearning.AI",
+              "author": "Weights & Biases + DeepLearning.AI",
+              "url": "https://www.deeplearning.ai/short-courses/evaluating-debugging-generative-ai/",
+              "free": true,
+              "hours": 2
+            },
+            {
+              "name": "Automated Testing for LLMOps",
+              "platform": "DeepLearning.AI",
+              "author": "DeepLearning.AI",
+              "url": "https://www.deeplearning.ai/short-courses/automated-testing-llmops/",
+              "free": true,
+              "hours": 2
+            }
+          ]
+        },
+        {
+          "id": "2-4",
+          "title": "Proyecto 2: Agente multi-step empresarial con evals formales",
+          "dimensions": ["T"],
+          "detail": "Construir un agente que ejecute un workflow completo: procesamiento de tickets, análisis de documentos o generación de reportes. El agente debe tener resiliencia (retry, circuit breaker, fallback), golden dataset con al menos 20 casos anotados, evals automatizados en CI/CD, y cost dashboard mostrando costo por ejecución. Usuario real obligatorio: misma persona del Proyecto 1 u otra, con sesión de feedback documentada.",
+          "estandar": "El agente tiene suite de evals automatizados con golden dataset versionado. Las métricas de tasa de éxito, costo por tarea y latencia están medidas. El costo por ejecución es conocido y dentro de un presupuesto definido.",
+          "usuarioReal": {
+            "requisito": "Al menos 1 usuario real con sesión de feedback documentada",
+            "entregable": "Comparación: qué esperaba vs qué obtuvo, qué cambió tras el feedback"
+          },
+          "courses": []
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "color": "amber",
+      "title": "Arquitectura AI-native con agentes",
+      "months": "Meses 4–6",
+      "hours": 140,
+      "goal": "Diseñar sistemas de agentes que escalen, sean resilientes, observables, seguros y operables por un equipo de ingeniería sin intervención constante del arquitecto.",
+      "focus": "Un sistema de agentes en producción es un sistema distribuido con estado, fallos, costos y equipos que lo mantienen. La coordinación entre agentes es donde realmente se rompen los sistemas — incluso para gente avanzada.",
+      "steps": [
+        {
+          "id": "3-1",
+          "title": "Coordinación multi-agente — el problema real de los sistemas distribuidos",
+          "dimensions": ["A", "T"],
+          "detail": "COORDINACIÓN MULTI-AGENTE EN PROFUNDIDAD — donde realmente se rompen los sistemas. Memoria compartida vs memoria aislada: cuándo los agentes comparten estado y cuándo es un error hacerlo (race conditions, contexto contradictorio). Orquestación centralizada (un agente orquestador que dirige a los demás) vs orquestación distribuida (agentes que se coordinan por mensajes). Protocolos de handoff: cómo un agente le pasa contexto a otro sin perder información crítica. Consistencia eventual en sistemas multiagente: qué pasa cuando dos agentes modifican el mismo recurso. Deadlocks en flujos de agentes y cómo prevenirlos.",
+          "coordinacionMultiagente": {
+            "memoriaCompartidaVsAislada": {
+              "compartida": "Agentes leen y escriben el mismo estado — riesgo de inconsistencias, requiere locking o diseño cuidadoso",
+              "aislada": "Cada agente tiene su propio contexto — más seguro pero requiere handoffs explícitos",
+              "cuandoUsar": "Compartida para estado de sesión; aislada para tareas independientes paralelas"
+            },
+            "orquestacion": {
+              "centralizada": "Un Supervisor dirige a los Worker agents — más control, cuello de botella potencial",
+              "distribuida": "Agentes se coordinan por mensajes — más escalable, más difícil de depurar",
+              "patron": "Empezar centralizado, migrar a distribuido solo si el volumen lo justifica"
+            },
+            "problemasComunes": [
+              "Contexto perdido en el handoff entre agentes",
+              "Dos agentes modificando el mismo recurso simultáneamente",
+              "Agente B esperando output de A que nunca llega (deadlock)",
+              "Estado compartido desincronizado entre réplicas del mismo agente"
+            ]
+          },
+          "courses": [
+            {
+              "name": "Designing Machine Learning Systems",
+              "platform": "O'Reilly",
+              "author": "Chip Huyen",
+              "url": "https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/",
+              "free": false,
+              "hours": 15
+            }
+          ]
+        },
+        {
+          "id": "3-2",
+          "title": "Patrones de arquitectura de sistemas de agentes",
+          "dimensions": ["A", "T"],
+          "detail": "Arquitecturas de referencia: Orchestrator-Worker, Supervisor, Pipeline, Event-driven agents. Tool layer: abstraer herramientas para que sean reemplazables sin cambiar el agente. Context layer: gestión de memoria y estado compartido. Guardrails: validación de inputs y outputs. C4 model aplicado a sistemas de agentes — diagramas que un equipo de ingeniería puede leer y mantener.",
+          "courses": []
+        },
+        {
+          "id": "3-3",
+          "title": "Infraestructura, despliegue y Cost Engineering a escala",
+          "dimensions": ["A", "T"],
+          "detail": "Agentes como microservicios: API REST, autenticación, rate limiting, versionado. Serverless para baja frecuencia (Lambda), contenedores para alta frecuencia. Colas de trabajo para agentes de larga duración. COST ENGINEERING A ESCALA: proyectar costo mensual a distintos volúmenes (100 tareas/día vs 10.000), identificar el paso más caro del pipeline y atacarlo primero, model routing en producción (clasificador ligero que decide qué modelo usa el agente en cada llamada), alertas automáticas cuando el costo supera el presupuesto definido. AWS Bedrock Agents, SageMaker, comparación con Azure AI Agents y GCP Vertex AI.",
+          "costEngineering": {
+            "produccion": [
+              "Proyección de costos: costo por tarea × volumen diario × 30 días",
+              "Identificar el paso más caro: normalmente el modelo más grande o el contexto más largo",
+              "Model routing en producción: lightweight classifier decide el modelo en runtime",
+              "Caching a nivel de infraestructura: semantic cache para queries similares",
+              "Budget alerts: cortar automáticamente si el gasto supera el threshold"
+            ]
+          },
+          "courses": [
+            {
+              "name": "AWS ML Foundations + Bedrock",
+              "platform": "AWS Skill Builder",
+              "author": "Amazon Web Services",
+              "url": "https://explore.skillbuilder.aws/learn",
+              "free": true,
+              "hours": 15
+            },
+            {
+              "name": "MLOps Specialization",
+              "platform": "Coursera",
+              "author": "Andrew Ng / DeepLearning.AI",
+              "url": "https://www.coursera.org/specializations/machine-learning-engineering-for-production-mlops",
+              "free": false,
+              "hours": 24
+            }
+          ]
+        },
+        {
+          "id": "3-4",
+          "title": "Observabilidad y seguridad de sistemas de agentes",
+          "dimensions": ["A", "T"],
+          "detail": "Trazabilidad: reconstruir por qué el agente tomó cada decisión (LangFuse, LangSmith, Arize). Métricas operacionales: latencia por paso, costo por tarea, tasa de éxito, número de pasos promedio. Prompt injection en agentes — riesgo mayor que en chatbots porque el agente ejecuta acciones reales. Sandboxing de herramientas: el agente no puede hacer más de lo que se le autoriza. PII detection y guardrails. OWASP Top 10 para LLMs. Logging estructurado para sistemas multiagente.",
+          "courses": [
+            {
+              "name": "LLMOps",
+              "platform": "DeepLearning.AI",
+              "author": "Google Cloud + DeepLearning.AI",
+              "url": "https://www.deeplearning.ai/short-courses/llmops/",
+              "free": true,
+              "hours": 2
+            },
+            {
+              "name": "Red Teaming LLM Applications",
+              "platform": "DeepLearning.AI",
+              "author": "Giskard + DeepLearning.AI",
+              "url": "https://www.deeplearning.ai/short-courses/red-teaming-llm-applications/",
+              "free": true,
+              "hours": 2
+            },
+            {
+              "name": "Quality and Safety for LLM Applications",
+              "platform": "DeepLearning.AI",
+              "author": "WhyLabs + DeepLearning.AI",
+              "url": "https://www.deeplearning.ai/short-courses/quality-safety-llm-applications/",
+              "free": true,
+              "hours": 2
+            }
+          ]
+        },
+        {
+          "id": "3-5",
+          "title": "Modelos open source y despliegue soberano",
+          "dimensions": ["T", "A"],
+          "detail": "Llama 3, Mistral, Mixtral: cuándo usar open source en vez de APIs de terceros. Fine-tuning con LoRA/QLoRA para casos de uso específicos. Ollama y vLLM para inferencia local. Despliegue soberano: datos que no pueden salir de la empresa. Comparar costos reales API vs self-hosted a distintas escalas — el break-even suele estar en volúmenes más altos de lo que se asume.",
+          "courses": [
+            {
+              "name": "Open Source Models with Hugging Face",
+              "platform": "DeepLearning.AI",
+              "author": "Hugging Face + DeepLearning.AI",
+              "url": "https://www.deeplearning.ai/short-courses/open-source-models-hugging-face/",
+              "free": true,
+              "hours": 2
+            },
+            {
+              "name": "Finetuning Large Language Models",
+              "platform": "DeepLearning.AI",
+              "author": "Lamini + DeepLearning.AI",
+              "url": "https://www.deeplearning.ai/short-courses/finetuning-large-language-models/",
+              "free": true,
+              "hours": 2
+            }
+          ]
+        },
+        {
+          "id": "3-6",
+          "title": "Proyecto 3: Arquitectura completa de sistema multiagente",
+          "dimensions": ["T", "A"],
+          "detail": "Diseñar e implementar arquitectura completa: mínimo 3 agentes especializados con coordinación explícita (handoffs documentados, decisión de memoria compartida vs aislada, orquestación centralizada con justificación). API REST para consumo externo, vector DB, observabilidad con trazas, resiliencia (circuit breakers, fallbacks), cost dashboard con proyección a escala. Incluye: diagrama C4 completo, ADRs para cada decisión, runbook de incidentes, estimación de costo a 1k/10k/100k tareas mensuales.",
+          "estandar": "Un equipo de ingeniería puede desplegar, operar y hacer rollback siguiendo la documentación. El costo proyectado a escala está documentado y dentro de márgenes viables.",
+          "courses": []
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "color": "purple",
+      "title": "Adopción de IA en empresas",
+      "months": "Meses 7–9",
+      "hours": 120,
+      "goal": "Identificar oportunidades reales de agentes en empresas, integrarlos con el tejido tecnológico existente, liderar la adopción organizacional y medir el impacto real con baseline comparativo.",
+      "focus": "Sin baseline no hay caso de negocio. Con baseline tienes el argumento que un CTO entiende en 30 segundos. Esta fase convierte implementaciones técnicas en resultados de negocio medibles.",
+      "steps": [
+        {
+          "id": "4-1",
+          "title": "AI Strategy — diagnóstico, priorización y baseline",
+          "dimensions": ["O", "A"],
+          "detail": "Framework para identificar qué procesos son candidatos reales para agentes: alto volumen, pasos repetibles, fuentes de datos accesibles, tolerancia a error definida. Cómo hacer un mapa de procesos y priorizar por impacto vs esfuerzo. ROI realista. Señales de alerta: cuándo un proceso NO es candidato. BASELINE OBLIGATORIO: antes de implementar cualquier agente, medir el estado actual — tiempo promedio por tarea manual, tasa de errores humanos, costo por tarea, volumen diario. Sin esto no hay forma de demostrar impacto real.",
+          "baseline": {
+            "metricas": [
+              "Tiempo promedio por tarea sin IA (en minutos o horas)",
+              "Tasa de errores en el proceso manual",
+              "Costo por tarea: tiempo del empleado × tarifa + herramientas",
+              "Volumen: cuántas tareas se procesan por día/semana/mes",
+              "Tiempo de respuesta al cliente o stakeholder"
+            ],
+            "nota": "El baseline se mide ANTES de empezar a construir. Sin baseline, cualquier mejora es anecdótica."
+          },
+          "courses": [
+            {
+              "name": "AI For Business (Wharton)",
+              "platform": "Coursera",
+              "author": "University of Pennsylvania / Wharton",
+              "url": "https://www.coursera.org/learn/wharton-ai-for-business",
+              "free": false,
+              "hours": 10
+            },
+            {
+              "name": "AI Product Management Specialization",
+              "platform": "Coursera",
+              "author": "Duke University",
+              "url": "https://www.coursera.org/specializations/ai-product-management-duke",
+              "free": false,
+              "hours": 16
+            }
+          ]
+        },
+        {
+          "id": "4-2",
+          "title": "Integración en el tejido tecnológico existente",
+          "dimensions": ["A", "T"],
+          "detail": "El problema real no es construir el agente — es integrarlo con lo que ya existe: CRMs, ERPs, sistemas legados, APIs internas con documentación incompleta. Agentes que consumen APIs REST/SOAP existentes. Integración bidireccional: el agente lee y escribe en sistemas de la empresa. n8n y Make para automatización complementaria sin reescribir sistemas. Gestión de permisos: el agente solo hace lo que se le autoriza explícitamente — principio de mínimo privilegio.",
+          "courses": [
+            {
+              "name": "Automatización con n8n e IA",
+              "platform": "Platzi",
+              "author": "Platzi",
+              "url": "https://platzi.com/cursos/n8n/",
+              "free": false,
+              "hours": 6
+            }
+          ]
+        },
+        {
+          "id": "4-3",
+          "title": "Change management y adopción organizacional",
+          "dimensions": ["O"],
+          "detail": "El sistema funciona técnicamente — ahora viene el trabajo más difícil: que la empresa lo adopte y lo opere sola. Estrategia de rollout por fases. Gestión de resistencia: 'el agente va a reemplazarme' vs 'el agente amplifica tu trabajo'. Runbooks y documentación operacional para equipos no-técnicos. Métricas de adopción. Human-in-the-loop como herramienta de confianza: empezar con el agente recomendando y humano aprobando, escalar a autonomía gradualmente. Ética y gobernanza: auditoría de decisiones autónomas, transparencia, sesgos.",
+          "courses": [
+            {
+              "name": "AI Ethics",
+              "platform": "Coursera",
+              "author": "University of Michigan",
+              "url": "https://www.coursera.org/learn/ethics-in-ai",
+              "free": false,
+              "hours": 10
+            },
+            {
+              "name": "Liderazgo y gestión de equipos tech",
+              "platform": "Platzi",
+              "author": "Platzi",
+              "url": "https://platzi.com/escuela/liderazgo/",
+              "free": false,
+              "hours": 12
+            }
+          ]
+        },
+        {
+          "id": "4-4",
+          "title": "Proyecto 4: Implementación real con métricas before/after",
+          "dimensions": ["T", "A", "O"],
+          "detail": "Implementar un sistema de agentes en un entorno real: empresa actual, equipo interno o caso cercano. BEFORE/AFTER OBLIGATORIO: el proyecto solo cuenta si existe un baseline medido antes de implementar y métricas comparativas después. El entregable central no es el código — es el caso de negocio con números reales. Incluye: baseline medido, sistema implementado, métricas post-implementación comparadas, runbook operacional, análisis de costo del sistema vs ahorro generado.",
+          "beforeAfter": {
+            "before": [
+              "Tiempo promedio por tarea manual: X minutos",
+              "Tasa de errores del proceso manual: X%",
+              "Costo por tarea (tiempo humano + herramientas): $X",
+              "Volumen procesado por día: X tareas"
+            ],
+            "after": [
+              "Tiempo promedio por tarea con agente: X minutos",
+              "Tasa de errores del agente (medida con evals): X%",
+              "Costo por tarea con agente (tokens + infra): $X",
+              "Volumen procesado por día con agente: X tareas",
+              "Tasa de escalación a humano: X%"
+            ],
+            "casoDeNegocio": "Ahorro mensual = (costo antes - costo después) × volumen mensual"
+          },
+          "estandar": "Existe baseline medido ANTES de implementar. Las métricas comparativas after están documentadas. El equipo opera el sistema sin intervención del arquitecto. El caso de negocio muestra impacto real en números.",
+          "courses": []
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "color": "teal",
+      "title": "Posicionamiento como AI Architect",
+      "months": "Meses 10–12",
+      "hours": 80,
+      "goal": "Convertir la experiencia acumulada en reputación técnica, certificaciones y una propuesta de valor clara para roles de Staff AI Engineer / AI Architect.",
+      "focus": "No es solo acumular logros — es articular en 30 segundos qué hace un AI Architect que no hace un developer de agentes, y demostrarlo con proyectos reales que tienen usuarios reales y métricas reales.",
+      "steps": [
+        {
+          "id": "5-1",
+          "title": "Certificación AWS Machine Learning Specialty",
+          "dimensions": ["T", "A"],
+          "detail": "La certificación más reconocida para arquitectos que integran IA en cloud. Cubre ingeniería de datos para ML, modelado, implementación y operaciones — incluyendo Bedrock Agents. Preparación: labs en SageMaker y Bedrock, exámenes simulados, whitepapers de AWS sobre arquitecturas de agentes.",
+          "courses": [
+            {
+              "name": "AWS Certified Machine Learning – Specialty",
+              "platform": "AWS Skill Builder",
+              "author": "Amazon Web Services",
+              "url": "https://explore.skillbuilder.aws/learn/course/external/view/elearning/34/machine-learning-exam-prep-aws-certified-machine-learning-specialty",
+              "free": false,
+              "hours": 30
+            },
+            {
+              "name": "AWS ML Specialty Practice Exams",
+              "platform": "Udemy",
+              "author": "Stephane Maarek",
+              "url": "https://www.udemy.com/course/aws-machine-learning/",
+              "free": false,
+              "hours": 15
+            }
+          ]
+        },
+        {
+          "id": "5-2",
+          "title": "Portafolio — proyectos que demuestran los tres pilares",
+          "dimensions": ["T", "A", "O"],
+          "detail": "Documentar los 4 proyectos en GitHub con README que documentan decisiones, no solo código: por qué este patrón, por qué este modelo, cuáles son los trade-offs, qué falló y cómo se resolvió. Cada proyecto incluye: usuario real que lo usó, métricas de evaluación, costo por ejecución medido. El Proyecto 4 incluye el caso de negocio con before/after. El portafolio demuestra los tres pilares: técnica (el agente funciona), arquitectural (el sistema escala), organizacional (el equipo lo opera solo).",
+          "courses": [
+            {
+              "name": "Technical Writing for Developers",
+              "platform": "Platzi",
+              "author": "Platzi",
+              "url": "https://platzi.com/cursos/escritura-tecnica/",
+              "free": false,
+              "hours": 4
+            }
+          ]
+        },
+        {
+          "id": "5-3",
+          "title": "Certificación IA Generativa",
+          "dimensions": ["T"],
+          "detail": "Segunda certificación orientada a agentes y sistemas AI-native. IBM AI Engineering Professional Certificate: cubre agentes, RAG, fine-tuning y despliegue — directamente alineado con el perfil de AI Architect. Alternativa: Generative AI for Software Engineering (Vanderbilt) para perspectiva más de ingeniería de producto.",
+          "courses": [
+            {
+              "name": "IBM AI Engineering Professional Certificate",
+              "platform": "Coursera",
+              "author": "IBM",
+              "url": "https://www.coursera.org/professional-certificates/ai-engineer",
+              "free": false,
+              "hours": 28
+            },
+            {
+              "name": "Generative AI for Software Engineering",
+              "platform": "Coursera",
+              "author": "Vanderbilt University",
+              "url": "https://www.coursera.org/specializations/generative-ai-software-engineering",
+              "free": false,
+              "hours": 20
+            }
+          ]
+        },
+        {
+          "id": "5-4",
+          "title": "Marca personal y presencia técnica",
+          "dimensions": ["O"],
+          "detail": "8–10 posts en LinkedIn con mini case studies reales: 'implementé un sistema multiagente en producción, esto fue lo que rompió y así lo resolví'. No posts de 'aprendí X'. El caso de negocio del Proyecto 4 (before/after con números) es el post más poderoso que puedes publicar — convierte a CTOs y directores de ingeniería en audiencia. Hablar en al menos 1 meetup técnico (PyCon Colombia, Colombia Tech). Conectar con líderes técnicos de empresas construyendo capacidades de IA internas.",
+          "courses": [
+            {
+              "name": "Personal Branding para ingenieros",
+              "platform": "Platzi",
+              "author": "Platzi",
+              "url": "https://platzi.com/cursos/marca-personal/",
+              "free": false,
+              "hours": 4
+            }
+          ]
+        },
+        {
+          "id": "5-5",
+          "title": "Reposicionamiento profesional",
+          "dimensions": ["O"],
+          "detail": "Propuesta de valor en 2 líneas: 'Arquitecto de software especializado en sistemas AI-native basados en agentes. Diagnostico qué procesos empresariales se benefician de agentes, diseño la arquitectura correcta, la implemento en producción con métricas de impacto medibles y dejo al equipo operándola.' Roles objetivo: Staff AI Engineer, AI Software Architect, Technical Lead en empresas construyendo capacidades de IA internas — LATAM y remoto.",
+          "courses": [
+            {
+              "name": "How to Get a Job in AI",
+              "platform": "DeepLearning.AI",
+              "author": "Andrew Ng",
+              "url": "https://www.deeplearning.ai/blog/how-to-get-a-job-in-ai/",
+              "free": true,
+              "hours": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

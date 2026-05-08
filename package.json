@@ -1,0 +1,13 @@
+{
+  "name": "ia-expert-roadmap",
+  "version": "1.0.0",
+  "description": "Tracker local de ruta IA Expert — 12 meses",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["ia", "roadmap", "aprendizaje"],
+  "author": "Tu nombre",
+  "license": "MIT"
+}

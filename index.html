@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IA Expert Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;1,14..32,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-mark">// roadmap</div>
+      <h1>IA Expert 2026</h1>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Navegación</div>
+      <div class="nav-item active" onclick="showView('dashboard')">
+        <span>◈</span> Dashboard
+      </div>
+      <div class="nav-item" onclick="showView('roadmap')">
+        <span>◉</span> Ruta completa
+      </div>
+      <div class="nav-section-label" style="margin-top:16px">Fases</div>
+      <div class="nav-item" id="nav-phase-1" onclick="showPhase(1)">
+        <span class="nav-dot dot-blue"></span>
+        <span style="font-size:12px">Fase 1 · Fundamentos</span>
+        <span class="nav-progress" id="nav-pct-1">0%</span>
+      </div>
+      <div class="nav-item" id="nav-phase-2" onclick="showPhase(2)">
+        <span class="nav-dot dot-teal"></span>
+        <span style="font-size:12px">Fase 2 · Arquitectura</span>
+        <span class="nav-progress" id="nav-pct-2">0%</span>
+      </div>
+      <div class="nav-item" id="nav-phase-3" onclick="showPhase(3)">
+        <span class="nav-dot dot-amber"></span>
+        <span style="font-size:12px">Fase 3 · Producto</span>
+        <span class="nav-progress" id="nav-pct-3">0%</span>
+      </div>
+      <div class="nav-item" id="nav-phase-4" onclick="showPhase(4)">
+        <span class="nav-dot dot-purple"></span>
+        <span style="font-size:12px">Fase 4 · Posicionamiento</span>
+        <span class="nav-progress" id="nav-pct-4">0%</span>
+      </div>
+    </nav>
+    <div class="sidebar-stats">
+      <div class="sidebar-stat">
+        <span class="sidebar-stat-label">Progreso total</span>
+        <span class="sidebar-stat-val" id="stat-total">0%</span>
+      </div>
+      <div class="sidebar-stat">
+        <span class="sidebar-stat-label">Pasos completados</span>
+        <span class="sidebar-stat-val" id="stat-steps">0 / 0</span>
+      </div>
+      <div class="sidebar-stat">
+        <span class="sidebar-stat-label">Cursos completados</span>
+        <span class="sidebar-stat-val" id="stat-courses">0 / 0</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- DASHBOARD -->
+    <div class="view active" id="view-dashboard">
+      <div class="view-header">
+        <h2>Dashboard</h2>
+        <p>Tu progreso en la ruta IA Expert — 12 meses</p>
+      </div>
+      <div class="dashboard-grid">
+        <div class="stat-card">
+          <div class="val" id="d-total" style="color:var(--blue)">0%</div>
+          <div class="lbl">Progreso total</div>
+        </div>
+        <div class="stat-card">
+          <div class="val" id="d-steps" style="color:var(--teal)">0</div>
+          <div class="lbl">Pasos hechos</div>
+        </div>
+        <div class="stat-card">
+          <div class="val" id="d-courses" style="color:var(--amber)">0</div>
+          <div class="lbl">Cursos hechos</div>
+        </div>
+        <div class="stat-card">
+          <div class="val" id="d-streak" style="color:var(--purple)">—</div>
+          <div class="lbl">Fase activa</div>
+        </div>
+      </div>
+      <div class="progress-overview">
+        <h3>Progreso por fase</h3>
+        <div id="phase-progress-rows"></div>
+      </div>
+      <div class="recent-activity">
+        <h3>Actividad reciente</h3>
+        <div id="activity-log"></div>
+      </div>
+    </div>
+
+    <!-- ROADMAP VIEW -->
+    <div class="view" id="view-roadmap">
+      <div class="view-header">
+        <h2>Ruta completa</h2>
+        <p>Vista general de las 4 fases y sus pasos</p>
+      </div>
+      <div class="roadmap-timeline" id="roadmap-timeline">
+        <div class="timeline-line"></div>
+      </div>
+      <div class="add-phase-section">
+        <button class="btn-add-phase" onclick="toggleAddPhaseForm()">Agregar fase</button>
+        <div class="inline-form" id="phase-form" style="display:none">
+          <div class="form-grid">
+            <input class="form-input form-input--wide" placeholder="Título de la fase *" id="pf-title">
+            <input class="form-input" placeholder="Período (ej: Meses 13–15)" id="pf-months">
+            <input class="form-input form-input--sm" type="number" placeholder="Horas" min="0" id="pf-hours">
+            <textarea class="form-input form-textarea" placeholder="Objetivo de la fase" id="pf-goal"></textarea>
+          </div>
+          <div class="form-color-picker">
+            <span class="form-color-label">Color</span>
+            <label class="form-color-opt"><input type="radio" name="pf-color" value="blue"   checked onchange="onColorRadioChange()"><span class="color-swatch swatch-blue"></span>Azul</label>
+            <label class="form-color-opt"><input type="radio" name="pf-color" value="teal"          onchange="onColorRadioChange()"><span class="color-swatch swatch-teal"></span>Verde</label>
+            <label class="form-color-opt"><input type="radio" name="pf-color" value="amber"         onchange="onColorRadioChange()"><span class="color-swatch swatch-amber"></span>Ámbar</label>
+            <label class="form-color-opt"><input type="radio" name="pf-color" value="purple"        onchange="onColorRadioChange()"><span class="color-swatch swatch-purple"></span>Púrpura</label>
+            <label class="form-color-opt"><input type="radio" name="pf-color" value="custom"        onchange="onColorRadioChange()"><span class="color-swatch" id="swatch-custom-preview" style="background:#6366f1"></span>Personalizado</label>
+          </div>
+          <div class="custom-color-fields" id="custom-color-fields" style="display:none">
+            <input class="form-input" placeholder="Nombre del color (ej: Naranja)" id="pf-color-name">
+            <input type="color" class="color-picker-native" id="pf-color-hex" value="#6366f1" oninput="updateCustomColorPreview()">
+          </div>
+          <div class="form-actions">
+            <button class="btn-submit" onclick="submitCustomPhase()">Guardar fase</button>
+            <button class="btn-cancel" onclick="toggleAddPhaseForm()">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE VIEWS -->
+    <div class="view" id="view-phase-1">
+      <div id="phase-content-1"></div>
+    </div>
+    <div class="view" id="view-phase-2">
+      <div id="phase-content-2"></div>
+    </div>
+    <div class="view" id="view-phase-3">
+      <div id="phase-content-3"></div>
+    </div>
+    <div class="view" id="view-phase-4">
+      <div id="phase-content-4"></div>
+    </div>
+
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="app.js"></script>
+</body>
+</html>
